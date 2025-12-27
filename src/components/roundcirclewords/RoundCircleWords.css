@@ -1,0 +1,132 @@
+/* RoundCircleWords.css */
+
+/* --- STRICT COLOR SYSTEM --- */
+:root {
+  /* Default (Light Mode) */
+  --bg-primary: #D0BCFC;
+  --text-highlight: #491AB1;
+  --svg-fill: #491AB1;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Mode Overrides */
+    --bg-primary: #24204A; /* Primary Dark Background */
+    --text-highlight: #D0BCFC; /* Soft Text for Dark Mode */
+    --svg-fill: #D0BCFC;
+  }
+}
+
+/* Global reset for this component's scope */
+body {
+  overflow-x: hidden;
+  background-color: var(--bg-primary); /* Matches the component bg */
+  transition: background-color 0.3s ease;
+}
+
+.rcw-container {
+  width: 100%;
+  position: relative;
+  background-color: var(--bg-primary);
+  color: var(--text-highlight);
+  overflow: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Wrapper pinned by GSAP */
+.pin-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* The SVG Text Container */
+.rotating-rings-container {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  z-index: 1; 
+}
+
+/* SVG Text Styling */
+.ring-text {
+  font-family: "Didot", "Bodoni MT", "Times New Roman", serif;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  dominant-baseline: middle;
+  /* Use the Strict Text Color */
+  fill: var(--svg-fill);
+  transition: fill 0.3s ease;
+}
+
+.inner-ring-text {
+  font-size: 20px;
+  font-weight: 700;
+  opacity: 1; /* Solid color */
+}
+
+.outer-ring-text {
+  font-size: 28px;
+  font-weight: 300;
+  opacity: 0.6; /* Slight transparency for hierarchy, but same color */
+}
+
+/* CSS Rotation Animations */
+.inner-ring-group {
+  transform-origin: center;
+  animation: rotate-ccw 30s linear infinite;
+}
+
+.outer-ring-group {
+  transform-origin: center;
+  animation: rotate-cw 45s linear infinite;
+}
+
+@keyframes rotate-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes rotate-ccw { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+
+/* Center Image Container */
+.center-image-container {
+  position: relative;
+  z-index: 10;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  overflow: hidden;
+  /* Shadow adapts to the highlight color but softer */
+  box-shadow: 0 25px 50px rgba(73, 26, 177, 0.25); 
+}
+
+.center-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Your requested image URL can go here. Using a high-res placeholder for now. */
+  background-image: url('https://i.pinimg.com/1200x/66/7f/d8/667fd8532b78d9ae474dde146c13ab8f.jpg');
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.1); 
+}
+
+/* Scroll Text Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: var(--text-highlight); /* Adapts to strict color */
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}

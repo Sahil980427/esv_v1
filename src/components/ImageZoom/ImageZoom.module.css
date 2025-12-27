@@ -1,0 +1,48 @@
+.scroller {
+  height: 800vh;
+  background: #000;
+}
+
+.viewport {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s;
+}
+
+.gridContainer {
+  display: grid;
+  width: 90vw;
+  height: 90vh;
+  gap: 1vmin;
+}
+
+.gridImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.loadingIndicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  color: white;
+  font-size: 1.2rem;
+  font-family: 'sans-serif';
+  z-index: 10;
+}
