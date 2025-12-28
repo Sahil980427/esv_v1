@@ -1,19 +1,49 @@
-import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
+import React, { useLayoutEffect, useRef, useState, useEffect } from "react";
 
 // --- Configuration ---
 const PROJECTS = [
-  { id: 1, title: "Lumina", category: "Branding", src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop" },
-  { id: 2, title: "Apex Arch", category: "Architecture", src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop" },
-  { id: 3, title: "Vortex", category: "Web Design", src: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop" },
-  { id: 4, title: "Essence", category: "Packaging", src: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2670&auto=format&fit=crop" },
-  { id: 5, title: "Mono", category: "Photography", src: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1000&auto=format&fit=crop" },
-  { id: 6, title: "Nebula", category: "Development", src: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670&auto=format&fit=crop" },
+  {
+    id: 1,
+    title: "Lumina",
+    category: "Branding",
+    src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop",
+  },
+  {
+    id: 2,
+    title: "Apex Arch",
+    category: "Architecture",
+    src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop",
+  },
+  {
+    id: 3,
+    title: "Vortex",
+    category: "Web Design",
+    src: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop",
+  },
+  {
+    id: 4,
+    title: "Essence",
+    category: "Packaging",
+    src: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2670&auto=format&fit=crop",
+  },
+  {
+    id: 5,
+    title: "Mono",
+    category: "Photography",
+    src: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1000&auto=format&fit=crop",
+  },
+  {
+    id: 6,
+    title: "Nebula",
+    category: "Development",
+    src: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670&auto=format&fit=crop",
+  },
 ];
 
 export default function Work() {
   const rootRef = useRef(null);
   const gridContainerRef = useRef(null);
-  const bgTextRef = useRef(null); // Ref for the background text group
+  const bgTextRef = useRef(null);
   const [scriptsLoaded, setScriptsLoaded] = useState(false);
 
   // --- Robust Script Loading (GSAP) ---
@@ -25,43 +55,54 @@ export default function Work() {
     }
     const loadScript = (src) => {
       return new Promise((resolve, reject) => {
-        if (document.querySelector(`script[src="${src}"]`)) { resolve(); return; }
-        const script = document.createElement('script');
-        script.src = src; script.async = true;
-        script.onload = resolve; script.onerror = reject;
+        if (document.querySelector(`script[src="${src}"]`)) {
+          resolve();
+          return;
+        }
+        const script = document.createElement("script");
+        script.src = src;
+        script.async = true;
+        script.onload = resolve;
+        script.onerror = reject;
         document.body.appendChild(script);
       });
     };
     Promise.all([
-      loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js'),
-      loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js')
-    ]).then(() => {
-      setTimeout(() => {
-        if (window.gsap && window.ScrollTrigger) {
-          window.gsap.registerPlugin(window.ScrollTrigger);
-          setScriptsLoaded(true);
-        }
-      }, 100);
-    }).catch(err => console.error("GSAP load error:", err));
+      loadScript(
+        "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+      ),
+      loadScript(
+        "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+      ),
+    ])
+      .then(() => {
+        setTimeout(() => {
+          if (window.gsap && window.ScrollTrigger) {
+            window.gsap.registerPlugin(window.ScrollTrigger);
+            setScriptsLoaded(true);
+          }
+        }, 100);
+      })
+      .catch((err) => console.error("GSAP load error:", err));
   }, []);
 
   // --- Animation Logic ---
   useLayoutEffect(() => {
     if (!scriptsLoaded) return;
     const gsap = window.gsap;
-    
+
     const ctx = gsap.context(() => {
-      const gridItems = gsap.utils.toArray('.grid-item');
-      
+      const gridItems = gsap.utils.toArray(".grid-item");
+
       // 1. Initial Chaotic State
       gridItems.forEach((item) => {
         gsap.set(item, {
-          z: gsap.utils.random(-2000, 1000), 
+          z: gsap.utils.random(-2000, 1000),
           xPercent: gsap.utils.random(-150, 150),
-          yPercent: gsap.utils.random(-150, 150), 
+          yPercent: gsap.utils.random(-150, 150),
           rotationX: gsap.utils.random(-60, 60),
           rotationY: gsap.utils.random(-60, 60),
-          opacity: 0
+          opacity: 0,
         });
       });
 
@@ -69,12 +110,12 @@ export default function Work() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: rootRef.current,
-          start: 'top top',
-          end: '+=3500', 
+          start: "top top", // Starts exactly when the top of the container hits the top of viewport
+          end: "+=3500",
           scrub: 1.2,
           pin: true,
           anticipatePin: 1,
-        }
+        },
       });
 
       // 3. Assembly Animation
@@ -89,61 +130,72 @@ export default function Work() {
         scale: 1,
         duration: 2.5,
         stagger: { amount: 0.8, from: "random" },
-        ease: "power3.out"
+        ease: "power3.out",
       })
-      // Fade out the background text slightly so images pop
-      .to(bgTextRef.current, {
-        opacity: 0, 
-        scale: 0.9,
-        duration: 2
-      }, "<");
+        // Fade out the background text slightly so images pop
+        .to(
+          bgTextRef.current,
+          {
+            opacity: 0,
+            scale: 0.9,
+            duration: 2,
+          },
+          "<"
+        );
 
       // 4. Subtle Drift (Parallax)
-      tl.to(gridContainerRef.current, {
-        z: 150,
-        rotationX: 5,
-        ease: "none",
-        duration: 1
-      }, "<");
-
+      tl.to(
+        gridContainerRef.current,
+        {
+          z: 150,
+          rotationX: 5,
+          ease: "none",
+          duration: 1,
+        },
+        "<"
+      );
     }, rootRef);
 
     // Mouse Interaction
     const handleMouseMove = (e) => {
-      if(!gridContainerRef.current) return;
+      if (!gridContainerRef.current) return;
       const { innerWidth, innerHeight } = window;
       const x = (e.clientX / innerWidth - 0.5) * 15;
       const y = (e.clientY / innerHeight - 0.5) * 15;
-      
+
       gsap.to(gridContainerRef.current, {
         rotationY: x,
         rotationX: -y,
         duration: 1,
-        ease: "power2.out"
+        ease: "power2.out",
       });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
     return () => {
       ctx.revert();
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, [scriptsLoaded]);
 
   return (
-    // <--- ADDED ID HERE --->
-    <div 
-      id="work" 
-      ref={rootRef} 
-      className="agency-wrapper"
-    >
-      {/* Import Nunito Font */}
-      <style>{`
+    <>
+      {/* --- SCROLL ANCHOR --- 
+        This div is the target for your Navbar Link.
+        It sits exactly above the pinned section. 
+        When you click "#work", the browser scrolls here, which is 
+        start of the animation (Top Top).
+      */}
+      <div id="work" className="section-anchor" />
+
+      {/* Main Pinned Container (ID Removed from here to prevent conflicts) */}
+      <div ref={rootRef} className="agency-wrapper">
+        {/* Import Nunito Font */}
+        <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
 
         /* --- STYLES --- */
         :root {
-          /* Light Mode Defaults */
           --bg-primary: #D0BCFC;
           --text-primary: #491AB1;
           --card-overlay: rgba(73, 26, 177, 0.9);
@@ -152,12 +204,21 @@ export default function Work() {
 
         @media (prefers-color-scheme: dark) {
           :root {
-            /* Dark Mode Defaults */
             --bg-primary: #24204A;
             --text-primary: #D0BCFC;
             --card-overlay: rgba(26, 18, 48, 0.95);
             --card-text: #D0BCFC;
           }
+        }
+        
+        /* The Anchor needs to be invisible but present */
+        .section-anchor {
+           position: absolute;
+           margin-top: -1px; /* Slight offset ensures trigger hits perfectly */
+           width: 1px;
+           height: 1px;
+           opacity: 0;
+           pointer-events: none;
         }
 
         .agency-wrapper {
@@ -200,7 +261,7 @@ export default function Work() {
           font-size: clamp(4rem, 15vw, 20rem);
           font-weight: 900;
           color: var(--text-primary);
-          opacity: 0.08; /* Very subtle watermark */
+          opacity: 0.08;
           white-space: nowrap;
           text-transform: uppercase;
           letter-spacing: -0.05em;
@@ -221,8 +282,8 @@ export default function Work() {
 
         .quote-sub .highlight {
           color: var(--text-primary);
-          font-weight: 900; /* Extra bold */
-          opacity: 1; /* Full opacity */
+          font-weight: 900;
+          opacity: 1;
         }
 
         /* --- Grid --- */
@@ -302,18 +363,6 @@ export default function Work() {
           margin-top: 4px;
         }
 
-        .arrow-icon {
-          width: 24px;
-          height: 24px;
-          fill: currentColor;
-          transform: rotate(-45deg);
-          transition: transform 0.3s ease;
-        }
-
-        .grid-item:hover .arrow-icon {
-          transform: rotate(0deg);
-        }
-
         .loading-text {
           position: absolute;
           top: 50%; left: 50%;
@@ -324,36 +373,33 @@ export default function Work() {
         }
       `}</style>
 
-      <div className="viewport-center">
-        
-        {/* Background Text Group with specific formatting */}
-        <div ref={bgTextRef} className="bg-text-group">
-          <h1 className="headline-bg">WORK</h1>
-          <p className="quote-sub">
-            Our <span className="highlight">work</span> is the silent ambassador of our quality
-          </p>
-        </div>
+        <div className="viewport-center">
+          <div ref={bgTextRef} className="bg-text-group">
+            <h1 className="headline-bg">WORK</h1>
+            <p className="quote-sub">
+              Our <span className="highlight">work</span> is the silent ambassador
+              of our quality
+            </p>
+          </div>
 
-        <div ref={gridContainerRef} className="grid-container">
-          {PROJECTS.map((project) => (
-            <div key={project.id} className="grid-item">
-              <img src={project.src} alt={project.title} className="grid-img" />
-              
-              <div className="project-overlay">
-                <div className="project-info">
-                  <span className="project-title">{project.title}</span>
-                  <span className="project-category">{project.category}</span>
+          <div ref={gridContainerRef} className="grid-container">
+            {PROJECTS.map((project) => (
+              <div key={project.id} className="grid-item">
+                <img src={project.src} alt={project.title} className="grid-img" />
+
+                <div className="project-overlay">
+                  <div className="project-info">
+                    <span className="project-title">{project.title}</span>
+                    <span className="project-category">{project.category}</span>
+                  </div>
                 </div>
-                <svg className="arrow-icon" viewBox="0 0 24 24">
-                  <path d="M16.172 11L10.808 5.63605L12.222 4.22205L20 12L12.222 19.778L10.808 18.364L16.172 13H4V11H16.172Z" />
-                </svg>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
-      {!scriptsLoaded && <div className="loading-text">LOADING ASSETS...</div>}
-    </div>
+        {!scriptsLoaded && <div className="loading-text">LOADING ASSETS...</div>}
+      </div>
+    </>
   );
 }

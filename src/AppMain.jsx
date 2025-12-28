@@ -23,6 +23,7 @@ import Work from "./mainpages/Work";
 import Contact from "./mainpages/Contact";
 import Navbar from "./integrate/Navbar";
 import IntroComphero from "./integrate/IntroComphero";
+import OverlapWheelContact from "./integrate/OverlapWheelContact";
 
 export default function AppMain() {
   const [gsapLoaded, setGsapLoaded] = useState(false);
