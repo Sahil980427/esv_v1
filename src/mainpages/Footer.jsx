@@ -13,7 +13,7 @@ const Footer = () => {
   const colors = {
     bg: "#D0BCFC",
     text: "#491AB1",
-    textDark: "#1A1230", // Darker color for headers
+    textDark: "#1A1230", 
     white: "#FFFFFF",
     accent: "#491AB1",
   };
@@ -77,7 +77,6 @@ const Footer = () => {
         },
         "start"
       )
-
         .to(
           ".footer-pill",
           {
@@ -90,7 +89,6 @@ const Footer = () => {
           },
           "start+=0.2"
         )
-
         .to(
           ".footer-bottom",
           {
@@ -191,7 +189,9 @@ const Footer = () => {
   };
 
   const handleScroll = (e, href) => {
-    if (href === "#") return;
+    // If it's an external link (http), allow default browser action
+    if (href === "#" || href.startsWith("http")) return;
+    
     e.preventDefault();
     const targetId = href.replace("#", "");
     const element = document.getElementById(targetId);
@@ -229,15 +229,20 @@ const Footer = () => {
     { name: "Knowledge", link: "#knowledge" },
   ];
 
+  // --- SOCIAL LINKS CONFIGURATION ---
   const socialLinks = [
     {
       name: "Website",
       type: "img",
       src: "/logos/logo_of_editspacevisuals.png",
+      href: "#hero", // Internal
+      isExternal: false,
     },
     {
       name: "Instagram",
       type: "svg",
+      href: "https://www.instagram.com/editspacevisuals?igsh=ZmFoeTNjcGY5NjJv",
+      isExternal: true,
       path: (
         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z M17.5 6.5h.01 M7.5 3h9a4.5 4.5 0 0 1 4.5 4.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3z" />
       ),
@@ -245,15 +250,11 @@ const Footer = () => {
     {
       name: "Gmail",
       type: "svg",
+      // Link specifically to Gmail Web Compose
+      href: "https://mail.google.com/mail/?view=cm&fs=1&to=editspacevisuals@gmail.com", 
+      isExternal: true, 
       path: (
         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6" />
-      ),
-    },
-    {
-      name: "Facebook",
-      type: "svg",
-      path: (
-        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
       ),
     },
   ];
@@ -316,7 +317,7 @@ const Footer = () => {
                 className="text-xl md:text-2xl font-extrabold mb-4 md:mb-6 uppercase border-b-2 pb-2 cursor-default inline-block origin-center"
                 style={{
                   borderColor: colors.text,
-                  color: colors.textDark, // Darker color
+                  color: colors.textDark, 
                   opacity: 1,
                   visibility: "visible",
                 }}
@@ -361,21 +362,39 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* --- Social Icons --- */}
+        {/* --- Social Icons (UPDATED) --- */}
         <div className="flex gap-4 md:gap-8 mb-10 md:mb-16 footer-social opacity-0 relative z-10 items-center justify-center">
           {socialLinks.map((social) => {
-            const isLogo = social.name === "Website";
-            const linkHref = isLogo ? "#hero" : "#";
-            const clickHandler = isLogo
-              ? (e) => handleScroll(e, "#hero")
-              : null;
+            // Logic to handle Click
+            const handleClick = (e) => {
+              // 1. If it's the internal website link
+              if (!social.isExternal) {
+                handleScroll(e, social.href);
+              } 
+              // 2. If it's Gmail, copy to clipboard AND let the link open
+              else if (social.name === "Gmail") {
+                navigator.clipboard.writeText("editspacevisuals@gmail.com")
+                  .then(() => {
+                     // Optional: You could log to console or show a toast here
+                     console.log("Email copied to clipboard");
+                  })
+                  .catch(err => {
+                    console.error("Failed to copy: ", err);
+                  });
+              }
+            };
+            
+            const targetAttr = social.isExternal ? "_blank" : "_self";
+            const relAttr = social.isExternal ? "noopener noreferrer" : "";
 
             return (
               <a
                 key={social.name}
-                href={linkHref}
-                onClick={clickHandler}
-                title={social.name}
+                href={social.href}
+                target={targetAttr}
+                rel={relAttr}
+                onClick={handleClick}
+                title={social.name === "Gmail" ? "Copy Email & Open Gmail" : social.name}
                 className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center cursor-pointer border-2 transition-all overflow-hidden"
                 style={{
                   backgroundColor: colors.text,
@@ -435,8 +454,6 @@ const Footer = () => {
           style={{ borderColor: colors.text, color: colors.textDark }}
         >
           <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            {/* MODIFIED LINE BELOW */}
-            {/* MODIFIED LINE BELOW: Added inline style to force the dark color */}
             <p style={{ color: "#24204A" }}>
               © 2025 EditSpaceVisuals. All rights reserved.
             </p>

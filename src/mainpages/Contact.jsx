@@ -5,6 +5,7 @@ import * as z from "zod";
 import DOMPurify from "dompurify";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import emailjs from "@emailjs/browser";
 import {
   ChevronDown,
   ArrowRight,
@@ -22,8 +23,14 @@ import {
   CheckSquare,
 } from "lucide-react";
 
-// --- CSS FOR PERFORMANCE (Add to your global CSS or inside a <style> tag) ---
-// We use CSS Keyframes instead of GSAP for the background to unblock the JS thread.
+// --- 1. EMAILJS CONFIGURATION (KEYS ADDED HERE) ---
+const EMAILJS_CONFIG = {
+  SERVICE_ID: "service_cs6roxl", // Service Key
+  TEMPLATE_ID: "template_8ucbq8o", // Template Key
+  PUBLIC_KEY: "0TQRyZZPF6qVsEZbs", // Public Key
+};
+
+// --- CSS FOR PERFORMANCE ---
 const globalStyles = `
 @keyframes floatBlob {
   0% { transform: translate(0, 0) scale(1); }
@@ -33,7 +40,7 @@ const globalStyles = `
 }
 .blob-anim {
   animation: floatBlob 20s infinite ease-in-out;
-  will-change: transform; /* GPU Hardware Acceleration */
+  will-change: transform;
 }
 .blob-anim-reverse {
   animation: floatBlob 25s infinite ease-in-out reverse;
@@ -41,7 +48,7 @@ const globalStyles = `
 }
 `;
 
-// --- 1. CONFIGURATION ---
+// --- 2. FORM CONFIGURATION ---
 
 const BASE_SERVICES_CONFIG = {
   "Web Development": { label: "Web Design & Dev", min: 5000, step: 1000 },
@@ -108,7 +115,7 @@ const formSchema = z
     }
   });
 
-// --- 2. OPTIMIZED BACKGROUND (CSS ONLY) ---
+// --- 3. OPTIMIZED BACKGROUND (CSS ONLY) ---
 const BackgroundBlobs = memo(() => {
   return (
     <div className="fixed inset-0 overflow-hidden z-0 pointer-events-none transform-gpu">
@@ -119,11 +126,9 @@ const BackgroundBlobs = memo(() => {
   );
 });
 
-// --- 3. LIGHTWEIGHT INPUTS (Reduced GSAP) ---
+// --- 4. LIGHTWEIGHT INPUTS (Reduced GSAP) ---
 const GsapInput = memo(({ label, error, register, name, icon: Icon, type = "text", helperText, ...props }) => {
   const [focused, setFocused] = useState(false);
-  
-  // Removed GSAP hook here. Using CSS transitions for speed.
   const borderColor = error ? "border-red-500" : focused || props.value ? "border-current" : "border-transparent";
   const scaleClass = focused || props.value ? "scale-[1.02]" : "scale-100";
   const iconOpacity = focused || props.value ? "opacity-100 scale-110" : "opacity-50 scale-100";
@@ -194,7 +199,7 @@ const GsapSelect = memo(({ value, onChange, options, error, icon: Icon, placehol
   );
 });
 
-// --- 4. MAIN FORM ---
+// --- 5. MAIN FORM ---
 export default function Contact() {
   const containerRef = useRef(null);
   const formCardRef = useRef(null);
@@ -209,14 +214,14 @@ export default function Contact() {
     register,
     handleSubmit,
     setValue,
-    useWatch: useWatchForm, // Renamed to avoid confusion
+    useWatch: useWatchForm,
     control,
     trigger,
     reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(formSchema),
-    mode: "onBlur", // <--- CRITICAL: Only validates when you leave the field, not while typing
+    mode: "onBlur",
     defaultValues: {
       prefix: "Mr.",
       name: "",
@@ -229,10 +234,8 @@ export default function Contact() {
     },
   });
 
-  // MINIMIZED WATCHERS: Only watch what controls other fields
   const selectedService = useWatch({ control, name: "service" });
   const selectedCurrency = useWatch({ control, name: "currency" });
-  // Note: We REMOVED watching "name" here to stop re-renders on keystroke.
 
   const { currentServiceConfig, currentSymbol, dynamicMin, dynamicStep } = useMemo(() => {
     const config = selectedService ? BASE_SERVICES_CONFIG[selectedService] : null;
@@ -247,11 +250,11 @@ export default function Contact() {
   useEffect(() => {
     if (selectedService) {
       setValue("budget", dynamicMin);
-      trigger("budget"); // Only trigger budget validation on service change
+      trigger("budget");
     }
   }, [selectedService, selectedCurrency, dynamicMin, setValue, trigger]);
 
-  // One-time Intro Animation
+  // Intro Animation
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
     tl.from(".header-reveal", { y: 50, opacity: 0, duration: 1, stagger: 0.1, ease: "power4.out" })
@@ -268,7 +271,7 @@ export default function Contact() {
   }, [showConfirmModal]);
 
   const onInitialSubmit = (data) => {
-    // Sanitization only happens on submit, not while typing
+    // Sanitize before showing modal
     const safeData = {
       ...data,
       name: DOMPurify.sanitize(data.name).trim(),
@@ -280,27 +283,61 @@ export default function Contact() {
     setShowConfirmModal(true);
   };
 
+  // --- CONNECTED TO EMAILJS WITH YOUR KEYS ---
   const handleFinalSubmit = async () => {
-    if (!isCurrencyConfirmed) return;
+    if (!isCurrencyConfirmed || !pendingData) return;
     setIsFinalSubmitting(true);
+
     const btn = document.querySelector(".final-btn");
+    const btnText = document.querySelector(".final-text");
+
+    // 1. Loading Animation
     gsap.to(btn, { width: 50, borderRadius: "50%", duration: 0.3 });
-    gsap.to(".final-text", { opacity: 0, duration: 0.2 });
+    gsap.to(btnText, { opacity: 0, duration: 0.2 });
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    alert("Success! Request logged.");
+    // 2. Prepare Data for EmailJS
+    const templateParams = {
+      from_name: `${pendingData.prefix} ${pendingData.name}`,
+      from_email: pendingData.email,
+      phone_number: pendingData.phone || "Not Provided",
+      service_type: pendingData.service,
+      budget_value: `${CURRENCIES[pendingData.currency].symbol} ${pendingData.budget} (${pendingData.currency})`,
+      message: pendingData.message,
+    };
 
-    setShowConfirmModal(false);
-    setIsFinalSubmitting(false);
-    reset();
-    setPendingData(null);
+    try {
+      // 3. Send Email using the keys defined at the top
+      await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID, // Using: service_cs6roxl
+        EMAILJS_CONFIG.TEMPLATE_ID, // Using: template_8ucbq8o
+        templateParams,
+        EMAILJS_CONFIG.PUBLIC_KEY   // Using: 0TQRyZZPF6qVsEZbs
+      );
+
+      // 4. Success State
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      
+      alert("Success! Your project details have been sent securely.");
+      setShowConfirmModal(false);
+      setIsFinalSubmitting(false);
+      reset(); // Clear form
+      setPendingData(null);
+
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      alert("Connection failed. Please check your internet or try again.");
+      
+      // 5. Revert Animation on Fail
+      setIsFinalSubmitting(false);
+      gsap.to(btn, { width: "100%", borderRadius: "0.75rem", duration: 0.3 });
+      gsap.to(btnText, { opacity: 1, duration: 0.2 });
+    }
   };
 
   return (
     <div id="contact" ref={containerRef} className="min-h-[100dvh] w-full relative font-['Nunito'] bg-[#D0BCFC] dark:bg-[#24204A] text-[#491AB1] dark:text-[#D0BCFC] overflow-x-hidden">
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap'); ${globalStyles}`}</style>
 
-      {/* CSS-Only Background (Zero JS Load) */}
       <BackgroundBlobs />
 
       {/* --- CONFIRMATION MODAL --- */}
@@ -342,10 +379,10 @@ export default function Contact() {
               </div>
 
               <div className="p-6 pt-2 flex gap-4">
-                <button onClick={() => setShowConfirmModal(false)} className="flex-1 py-4 rounded-xl font-bold uppercase tracking-wider border-2 border-current opacity-60 hover:opacity-100 flex items-center justify-center gap-2">
+                <button onClick={() => !isFinalSubmitting && setShowConfirmModal(false)} className="flex-1 py-4 rounded-xl font-bold uppercase tracking-wider border-2 border-current opacity-60 hover:opacity-100 flex items-center justify-center gap-2 disabled:cursor-not-allowed">
                   <X size={18} /> Edit
                 </button>
-                <button onClick={handleFinalSubmit} disabled={!isCurrencyConfirmed || isFinalSubmitting} className="final-btn flex-[2] py-4 rounded-xl font-black uppercase tracking-wider bg-[#491AB1] text-[#D0BCFC] dark:bg-[#D0BCFC] dark:text-[#24204A] flex items-center justify-center gap-2 disabled:opacity-30">
+                <button onClick={handleFinalSubmit} disabled={!isCurrencyConfirmed || isFinalSubmitting} className="final-btn flex-[2] py-4 rounded-xl font-black uppercase tracking-wider bg-[#491AB1] text-[#D0BCFC] dark:bg-[#D0BCFC] dark:text-[#24204A] flex items-center justify-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed transition-all">
                   <span className="final-text flex items-center gap-2">Confirm & Submit <CheckCircle2 size={18} /></span>
                 </button>
               </div>
@@ -373,7 +410,6 @@ export default function Contact() {
                   <GsapSelect placeholder="Title" icon={User} options={prefixes.map((p) => ({ label: p, value: p }))} value={useWatch({ control, name: "prefix" })} onChange={(val) => setValue("prefix", val)} />
                 </div>
                 <div className="col-span-8 md:col-span-9 lg:col-span-9">
-                  {/* Note: No 'value' prop passed here to avoid re-rendering parent on keystroke */}
                   <GsapInput icon={User} label="Full Name" name="name" register={register} error={errors.name} />
                 </div>
               </div>
@@ -392,7 +428,6 @@ export default function Contact() {
                   <GsapSelect placeholder="Currency" icon={Globe} options={currencyList} value={selectedCurrency} onChange={(val) => { setValue("currency", val); trigger("budget"); }} error={errors.currency} />
                 </div>
                 <div className="col-span-7 md:col-span-8">
-                   {/* Note: 'value' passed here is OK because it changes programmatically, not via typing */}
                   <GsapInput icon={DollarSign} label={currentServiceConfig ? `Budget (${currentSymbol})` : "Budget"} name="budget" type="number" min={dynamicMin} step={dynamicStep} disabled={!selectedService} register={register} error={errors.budget} helperText={currentServiceConfig ? `Min: ${currentSymbol}${dynamicMin}` : null} value={useWatch({ control, name: "budget" })} />
                 </div>
               </div>

@@ -24,6 +24,7 @@ import Contact from "./mainpages/Contact";
 import Navbar from "./integrate/Navbar";
 import IntroComphero from "./integrate/IntroComphero";
 import OverlapWheelContact from "./integrate/OverlapWheelContact";
+import FeedbackWidget from "./mainpages/FeedbackWidget";
 
 export default function AppMain() {
   const [gsapLoaded, setGsapLoaded] = useState(false);
@@ -111,6 +112,7 @@ const [introFinished, setIntroFinished] = useState(false);
       {/* <IntroComphero /> */}
       {!introFinished && <IntroComp onComplete={() => setIntroFinished(true)} />}
       <Hero startAnim={introFinished} />
+        <FeedbackWidget/>
 
       <ExpandableTab />
       <About />
