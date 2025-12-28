@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ServicesTextReveal from "./mainpages/ServicesTextReveal";
-import ServicesTextShowcase from "./mainpages/ServicesTextShowcase";
-import MovingText from "./mainpages/MovingText";
 import WheelImage from "./mainpages/WheelImage";
 import ExpandableTab from "./mainpages/ExpandableTab";
 import IntroComp from "./mainpages/IntroComp";
@@ -14,21 +11,16 @@ import ManagementStandard from "./mainpages/ManagementStandard";
 import WhyESV from "./mainpages/WhyESV";
 import KnowledgeService from "./mainpages/KnowledgeService";
 import SmallMarqueeBanner from "./mainpages/SmallMarqueeBanner";
-import ImageParallaxEffect from "./mainpages/ImageParallaxEffect";
 import Testimonials from "./mainpages/Testimonials";
 import AllServices from "./mainpages/AllServices";
-import Navbar_Desktop from "./mainpages/Navbar_Desktop";
-import Navbar_Phone from "./mainpages/Navbar_Phone";
 import Work from "./mainpages/Work";
 import Contact from "./mainpages/Contact";
-import Navbar from "./integrate/Navbar";
-import IntroComphero from "./integrate/IntroComphero";
-import OverlapWheelContact from "./integrate/OverlapWheelContact";
 import FeedbackWidget from "./mainpages/FeedbackWidget";
+import Navbar from "./integrate/Navbar";
 
 export default function AppMain() {
   const [gsapLoaded, setGsapLoaded] = useState(false);
-const [introFinished, setIntroFinished] = useState(false);
+  const [introFinished, setIntroFinished] = useState(false);
   useEffect(() => {
     // 1. Load GSAP and ScrollTrigger once globally
     const loadScript = (src) => {
@@ -68,7 +60,7 @@ const [introFinished, setIntroFinished] = useState(false);
   if (!gsapLoaded)
     return (
       <div className="h-screen w-screen bg-black text-white flex items-center justify-center font-sans">
-        Loading Experience...
+        Loading EditSpaceVisuals...
       </div>
     );
 
@@ -101,19 +93,13 @@ const [introFinished, setIntroFinished] = useState(false);
           scrollbar-width: none;  /* Firefox */
         }
         `}</style>
-        {/* Hero is always present, but waits for introFinished to start animations */}
 
-      {/* IntroComp renders on top, locks scroll, and sets state when done */}
-      {/* <IntroComp/> */}
-      {/* <Navbar_Desktop/> */}
-      {/* <Navbar_Phone /> */}
-      {/* <Hero/>  */}
-      {/* <Navbar isDarkMode={true} /> */}
-      {/* <IntroComphero /> */}
-      {!introFinished && <IntroComp onComplete={() => setIntroFinished(true)} />}
+      <Navbar isDarkMode={true} />
+      {!introFinished && (
+        <IntroComp onComplete={() => setIntroFinished(true)} />
+      )}
       <Hero startAnim={introFinished} />
-        <FeedbackWidget/>
-
+      <FeedbackWidget />
       <ExpandableTab />
       <About />
       <WhyESV />
@@ -129,11 +115,6 @@ const [introFinished, setIntroFinished] = useState(false);
       <Contact />
       <WheelImage />
       <Footer />
-
-      {/* <ServicesTextShowcase/>  */}
-      {/* <MovingText />  */}
-      {/* <ServicesTextReveal/>  */}
-      {/* <ImageParallaxEffect/>  */}
     </main>
   );
 }

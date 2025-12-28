@@ -1,19 +1,35 @@
-import React from "react";
-import "./App.css";
+import React from 'react';import "./App.css";
 import AppMain from "./AppMain";
-import IntroCompHero from "./integrate/IntroComphero";
-import Navbar from "./integrate/Navbar";
-import RoutingMain from "./routing/RoutingMain";
-import FeedbackWidget from "./mainpages/FeedbackWidget";
+// import Preloader from "./mainpages/Preloader";
 
 export default function App() {
+//  const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const handleLoad = () => {
+//       // 1.5s delay for a premium feel
+//       setTimeout(() => {
+//         setLoading(false);
+//       }, 1500);
+//     };
+
+//     if (document.readyState === 'complete') {
+//       handleLoad();
+//     } else {
+//       window.addEventListener('load', handleLoad);
+//       return () => window.removeEventListener('load', handleLoad);
+//     }
+//   }, []);
+
   return (
     <>
-      {/* <RoutingMain/> */}
-      {/* <Navbar isDarkMode={true} /> */}
-      {/* <IntroCompHero/> */}
-      <AppMain/>
-      {/* <FeedbackWidget /> */}
+{/* //       {loading ? ( */}
+{/* //         <Preloader /> */}
+{/* //       ) : ( */}
+{/* //         <div className="fade-in"> */}
+          <AppMain />
+      {/* //   </div> */}
+      {/* // )} */}
     </>
   );
 }
