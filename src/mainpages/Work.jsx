@@ -4,27 +4,31 @@ import React, { useLayoutEffect, useRef, useState, useEffect } from "react";
 const PROJECTS = [
   {
     id: 1,
-    title: "Lumina",
-    category: "Branding",
-    src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop",
+    title: "WordPress Website",
+    category: "Website",
+    src: "/work/wordpress_website_design.jpg",
+    // "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop",
   },
   {
     id: 2,
-    title: "Apex Arch",
-    category: "Architecture",
-    src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop",
+    title: "Video Editing",
+    category: "Video",
+    src: "/work/video_editing.gif",
+    // "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop",
   },
   {
     id: 3,
     title: "Vortex",
     category: "Web Design",
-    src: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop",
+    src: "/work/website_design.jpg",
+    // "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop",
   },
   {
     id: 4,
-    title: "Essence",
-    category: "Packaging",
-    src: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2670&auto=format&fit=crop",
+    title: "AI & Chatbot",
+    category: "Packaging Details",
+    src: "/work/ai_chatbot.png",
+    // "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2670&auto=format&fit=crop",
   },
   {
     id: 5,
@@ -34,7 +38,7 @@ const PROJECTS = [
   },
   {
     id: 6,
-    title: "Nebula",
+    title: "Backend Connectivity",
     category: "Development",
     src: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670&auto=format&fit=crop",
   },
@@ -377,15 +381,19 @@ export default function Work() {
           <div ref={bgTextRef} className="bg-text-group">
             <h1 className="headline-bg">WORK</h1>
             <p className="quote-sub">
-              Our <span className="highlight">work</span> is the silent ambassador
-              of our quality
+              Our <span className="highlight">work</span> is the silent
+              ambassador of our quality
             </p>
           </div>
 
           <div ref={gridContainerRef} className="grid-container">
             {PROJECTS.map((project) => (
               <div key={project.id} className="grid-item">
-                <img src={project.src} alt={project.title} className="grid-img" />
+                <img
+                  src={project.src}
+                  alt={project.title}
+                  className="grid-img"
+                />
 
                 <div className="project-overlay">
                   <div className="project-info">
@@ -398,7 +406,9 @@ export default function Work() {
           </div>
         </div>
 
-        {!scriptsLoaded && <div className="loading-text">LOADING ASSETS...</div>}
+        {!scriptsLoaded && (
+          <div className="loading-text">LOADING ASSETS...</div>
+        )}
       </div>
     </>
   );

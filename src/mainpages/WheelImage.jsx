@@ -4,59 +4,73 @@ import React, { useLayoutEffect, useRef, useState, useEffect } from "react";
 const SERVICES_DATA = [
   {
     label: "Web Development",
-    src: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400&auto=format&fit=crop",
+    src: "/wheelimage/1.jpeg",
+    // "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400&auto=format&fit=crop",
   },
   {
     label: "Graphic Design",
-    src: "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=400&auto=format&fit=crop",
+    src: "/wheelimage/2.jpeg",
+    // "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=400&auto=format&fit=crop",
   },
   {
     label: "Trading Expertise",
-    src: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=400&auto=format&fit=crop",
+    src: "/wheelimage/3.jpeg",
+    // "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=400&auto=format&fit=crop",
   },
   {
     label: "Video Editing",
-    src: "https://i.pcmag.com/imagery/reviews/06A9MdJJnRy67fTdILpVS5M-145..v1646934350.png",
+    src: "/wheelimage/4.webp",
+    // "https://i.pcmag.com/imagery/reviews/06A9MdJJnRy67fTdILpVS5M-145..v1646934350.png",
   },
   {
     label: "AI & Bot Development",
-    src: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=400&auto=format&fit=crop",
+    src: "/wheelimage/5.jpeg",
+    // "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=400&auto=format&fit=crop",
   },
   {
     label: "Database Handling",
-    src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=400&auto=format&fit=crop",
+    src:"/wheelimage/6.jpeg",
+    //  "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=400&auto=format&fit=crop",
   },
   {
     label: "Digital Marketing",
-    src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=400&auto=format&fit=crop",
+    src: "/wheelimage/7.jpeg",
+    // "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=400&auto=format&fit=crop",
   },
   {
     label: "Course Providing",
-    src: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=400&auto=format&fit=crop",
+    src:"/wheelimage/8.jpeg",
+    //  "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=400&auto=format&fit=crop",
   },
   {
     label: "WordPress Design",
-    src: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=400&auto=format&fit=crop",
+    src: "/wheelimage/9.jpeg",
+    // "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=400&auto=format&fit=crop",
   },
   {
     label: "Photo Editing",
-    src: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=400&auto=format&fit=crop",
+    src: "/wheelimage/10.jpeg",
+    // "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=400&auto=format&fit=crop",
   },
   {
     label: "Advanced Tech Solutions",
-    src: "https://images.unsplash.com/photo-1591405351990-4726e331f141?q=80&w=400&auto=format&fit=crop",
+    src: "/wheelimage/11.jpeg",
+    // "https://images.unsplash.com/photo-1591405351990-4726e331f141?q=80&w=400&auto=format&fit=crop",
   },
   {
     label: "Pro Trading Setup",
-    src: "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=400&auto=format&fit=crop",
+    src: "/wheelimage/12.jpeg",
+    // "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=400&auto=format&fit=crop",
   },
   {
     label: "Premium Workspace",
-    src: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=400&auto=format&fit=crop",
+    src:"/wheelimage/13.jpeg",
+    //  "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=400&auto=format&fit=crop",
   },
   {
     label: "Digital Strategy",
-    src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=400&auto=format&fit=crop",
+    src: "/wheelimage/14.jpeg",
+    // "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=400&auto=format&fit=crop",
   },
 ];
 

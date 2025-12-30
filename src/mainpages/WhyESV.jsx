@@ -9,7 +9,8 @@ const SLIDES = [
   {
     id: 0,
     color: "#000000",
-    src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80",
+    src: "/whyesv/0.jpg",
+    // src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80",
     title: "Why ESV?",
     ethos: "The Intersection of Vision & Reality",
     description:
@@ -19,7 +20,8 @@ const SLIDES = [
   {
     id: 1,
     color: "#24204A",
-    src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=80",
+    src: "/whyesv/1.jpg",
+    // src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=80",
     title: "Harmonizing",
     ethos: "Fragmentation creates noise; unity creates clarity.",
     description:
@@ -28,7 +30,8 @@ const SLIDES = [
   {
     id: 2,
     color: "#3a1c4a",
-    src: "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=1600&q=80",
+    src: "/whyesv/2.jpg",
+    // src: "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=1600&q=80",
     title: "Soul of Brand",
     ethos: "Design is not just what it looks like; it is how it makes you feel.",
     description:
@@ -37,7 +40,8 @@ const SLIDES = [
   {
     id: 3,
     color: "#1c2b4a",
-    src: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=80",
+    src: "/whyesv/3.jpg",
+    // src: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=80",
     title: "Tech Support",
     ethos: "Technology should be the wind at your back, not a hurdle.",
     description:
@@ -46,7 +50,8 @@ const SLIDES = [
   {
     id: 4,
     color: "#4a3b1c",
-    src: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1600&q=80",
+    src: "/whyesv/4.jpg",
+    // src: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1600&q=80",
     title: "Empowerment",
     ethos: "True success is best when it is shared.",
     description:
@@ -55,7 +60,8 @@ const SLIDES = [
   {
     id: 5,
     color: "#4a1c1c",
-    src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&q=80",
+    src: "/whyesv/5.jpg",
+    // src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&q=80",
     title: "Partnership",
     ethos: "Excellence is the peace of mind we deliver.",
     description:

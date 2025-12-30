@@ -16,11 +16,21 @@ const THEME = {
 };
 
 const TESTIMONIALS = [
-  { id: 1, name: "Elena Richardson", role: "Product Designer, Google", quote: "The visual flow is unlike anything I have seen. It completely transformed our user experience.", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" },
-  { id: 2, name: "Marcus Chen", role: "CTO, TechFlow", quote: "Clean, performant, and absolutely stunning. The dark mode implementation is flawless.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" },
-  { id: 3, name: "Sarah Jenkins", role: "Art Director", quote: "I've never seen code translate into art so seamlessly. A true masterpiece of development.", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" },
-  { id: 4, name: "David O'Neil", role: "Founder, StartUp", quote: "Exceeded every expectation. The attention to detail in the animations is simply unmatched.", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" },
-  { id: 5, name: "Priya Patel", role: "Lead Dev, Amazon", quote: "Robust architecture wrapped in a beautiful design. Highly recommended for premium projects.", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" }
+  { id: 1, name: "Sumit Kumar", role: "Product Designer", quote: "Solid features wrapped in a very classy layout. Highly recommended for Wordpress websites.", img: "/testimonials/1.jpg"
+    // "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" 
+  },
+  { id: 2, name: "Elena Richardson", role: "CTO", quote: "Clean, performant, and absolutely stunning. The dark mode implementation is flawless.", img: "/testimonials/2.jpg"
+    // "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" 
+  },
+  { id: 3, name: "Sarah Jenkins", role: "Art Client", quote: "Never seen raw photos turn into magic so nicely. A true masterpiece of editing.", img: "/testimonials/3.jpg"
+    //  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" 
+    },
+  { id: 4, name: "Prashant Nair", role: "Founder, StartUp", quote: "Exceeded every expectation. The attention to detail in the animations is simply unmatched.", img: "/testimonials/4.jpg"
+    // "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" 
+  },
+  { id: 5, name: "Priya Patel", role: "Lead Dev", quote: "The teaching style is simple and straight to point. It completely transformed my skills.", img: "/testimonials/5.jpg"
+    // "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
+   }
 ];
 
 export default function Testimonials() {

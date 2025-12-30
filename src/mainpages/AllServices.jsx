@@ -25,7 +25,8 @@ const COMPETENCIES = [
     index: "01",
     description:
       "We move beyond templates to build high-performance, reactive websites. Specializing in React.js and modern frameworks, we create digital experiences that are fast, interactive, and perfectly responsive.",
-    src: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1000&auto=format&fit=crop",
+      src: "/allservices/1.jpg",
+    // src: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1000&auto=format&fit=crop",
   },
   {
     id: 2,
@@ -34,7 +35,8 @@ const COMPETENCIES = [
     index: "02",
     description:
       "Transforming raw footage into compelling narratives. Our post-production suite handles professional video editing, color grading, and motion graphics designed to increase engagement.",
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ivtfgh3xGjgH6u8ryqc-DuphK3aGd-2LRw&s",
+      src: "/allservices/2.jpg",
+    // src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ivtfgh3xGjgH6u8ryqc-DuphK3aGd-2LRw&s",
   },
   {
     id: 3,
@@ -43,7 +45,8 @@ const COMPETENCIES = [
     index: "03",
     description:
       "Scalable content management systems tailored to your workflow. We provide custom theme development, plugin integration, and site optimization, ensuring your site is secure and easy to manage.",
-    src: "https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=1000&auto=format&fit=crop",
+      src: "/allservices/3.jpg",
+    // src: "https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=1000&auto=format&fit=crop",
   },
   {
     id: 4,
@@ -52,7 +55,8 @@ const COMPETENCIES = [
     index: "04",
     description:
       "Growth driven by data. We implement targeted marketing strategies and Search Engine Optimization (SEO) to increase your digital footprint, drive qualified traffic, and maximize ROI.",
-    src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
+      src: "/allservices/4.jpg",
+    // src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
   },
   {
     id: 5,
@@ -61,7 +65,8 @@ const COMPETENCIES = [
     index: "05",
     description:
       "Defining your visual language. From logo systems to marketing collateral and photo retouching, we ensure every pixel aligns with your corporate identity and communicates authority.",
-    src: "https://indianmediastudies.com/wp-content/uploads/2017/04/Brand-Identity-vs-Brand-Image.jpg.webp",
+      src: "/allservices/5.webp",
+    // src: "https://indianmediastudies.com/wp-content/uploads/2017/04/Brand-Identity-vs-Brand-Image.jpg.webp",
   },
   {
     id: 6,
@@ -70,7 +75,8 @@ const COMPETENCIES = [
     index: "06",
     description:
       "Future-proofing your operations. We develop custom chatbots and integrate Artificial Intelligence tools to automate customer interactions and streamline internal workflows.",
-    src: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop",
+      src: "/allservices/6.jpg",
+    // src: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop",
   },
   {
     id: 7,
@@ -79,7 +85,8 @@ const COMPETENCIES = [
     index: "07",
     description:
       "Secure and efficient data handling. We structure and manage backend databases to ensure your applications run smoothly and your data remains accessible and protected.",
-    src: "https://blog.paessler.com/hubfs/Blogheader_PPEM-goes-Datacenter.jpg",
+      src: "/allservices/7.webp",
+    // src: "https://blog.paessler.com/hubfs/Blogheader_PPEM-goes-Datacenter.jpg",
   },
   {
     id: 8,
@@ -88,7 +95,8 @@ const COMPETENCIES = [
     index: "08",
     description:
       "Empowering financial literacy. We provide expert-led trading education and technical analysis training, equipping individuals with the knowledge to navigate complex markets.",
-    src: "https://assets.peoplematters.in/images/7f208afe-50a0-41a5-bb04-51caeddaad70.jpg",
+      src: "/allservices/8.jpg",
+    // src: "https://assets.peoplematters.in/images/7f208afe-50a0-41a5-bb04-51caeddaad70.jpg",
   },
   {
     id: 9,
@@ -97,7 +105,8 @@ const COMPETENCIES = [
     index: "09",
     description:
       "Bridging the gap between knowledge and audience. We build and manage Learning Management Systems (LMS) for educators and coaches, handling the technical side of course delivery.",
-    src: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1000&auto=format&fit=crop",
+      src: "/allservices/9.jpg",
+    // src: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1000&auto=format&fit=crop",
   },
 ];
 

@@ -53,7 +53,8 @@ const slides = [
     title: "Total Synergy",
     content:
       "We don't work in silos. Your web developer talks to your SEO manager; your video editor aligns with your brand strategist. We create a unified vision.",
-    image: "https://abovewhispers.com/wp-content/uploads/2016/02/synergyc.jpg",
+    image: "/managementstandard/1.jpg",
+    //  "https://abovewhispers.com/wp-content/uploads/2016/02/synergyc.jpg",
   },
   {
     id: 2,
@@ -63,8 +64,8 @@ const slides = [
     title: "Process Driven",
     content:
       "Every project follows a strict lifecycle—Planning, Execution, Quality Assurance, and Delivery. We minimize risk through rigorous structure.",
-    image:
-      "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1000&q=80",
+    image: "/managementstandard/2.jpg",
+      // "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1000&q=80",
   },
   {
     id: 3,
@@ -74,8 +75,8 @@ const slides = [
     title: "Scalability",
     content:
       "We build solutions that grow as you grow. Our systems are designed to handle your expansion without needing to be rebuilt from scratch.",
-    image:
-      "https://inc42.com/cdn-cgi/image/quality=75/https://asset.inc42.com/2023/10/Glossary-Series-Startups-f7.png",
+    image: "/managementstandard/3.png",
+      // "https://inc42.com/cdn-cgi/image/quality=75/https://asset.inc42.com/2023/10/Glossary-Series-Startups-f7.png",
   },
   {
     id: 4,
@@ -85,8 +86,8 @@ const slides = [
     title: "Pure Coordination",
     content:
       "Design is not just how it looks, but how it works. We align aesthetics with functionality to create seamless user experiences.",
-    image:
-      "https://images.unsplash.com/photo-1506784365847-bbad939e9335?auto=format&fit=crop&w=1000&q=80",
+    image: "/managementstandard/4.jpg",
+      // "https://images.unsplash.com/photo-1506784365847-bbad939e9335?auto=format&fit=crop&w=1000&q=80",
   },
 ];
 
